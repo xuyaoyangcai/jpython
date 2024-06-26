@@ -46,12 +46,16 @@ public class Interpreter {
         Parser parser = new Parser();
         if(node instanceof Assign){
             // Todo: 实现连续赋值 比如a=b=1
-            String variableName;
-            exprType target = ((Assign) node).targets.get(0);
-            variableName = parser.getNameVal((Name) target);
+            String[] variableName = new String[2];
+            exprType[] target = new exprType[2];
+            int length = ((Assign)node).targets.toArray().length;
+            for(int i = 0; i < length; i++){
+                target[i] = ((Assign) node).targets.get(i);
+                variableName[i] = parser.getNameVal((Name) target[i]);
+            }
             exprType value = ((Assign) node).value;
             Expression expression = parser.parseExpression(value);
-            return new AssignStatement(variableName,expression);
+            return new AssignStatement(expression, variableName);
         }
         if (node instanceof For){
             For forNode = (For) node;
