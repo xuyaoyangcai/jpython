@@ -36,19 +36,18 @@ public class PyFloat extends PyObject
 
     @Override
     public PyObject add(PyObject p) {
-        if (p instanceof PyLong){
+        if (p instanceof PyLong) {
             return new PyFloat(this.num + ((PyLong) p).asLong());
         }
-        if (p instanceof PyFloat){
-            return new PyFloat(this.num+((PyFloat) p).asFloat());
+        if (p instanceof PyFloat) {
+            return new PyFloat(this.num + ((PyFloat) p).asFloat());
         }
-        if (p instanceof PyUnicode){
-            return new PyUnicode( (this.toString() + p.toString()).getBytes(), "utf-8");
+        if (p instanceof PyUnicode) {
+            return new PyUnicode((this.toString() + p.toString()).getBytes(), "utf-8");
         }
-        if(p instanceof PyBoolean){
-            return new PyFloat(this.num+((PyBoolean) p).asInt());
-        }
-        else{
+        if (p instanceof PyBoolean) {
+            return new PyFloat(this.num + ((PyBoolean) p).asInt());
+        } else {
             super.add(p);
             return new PyNone();
         }
@@ -56,37 +55,76 @@ public class PyFloat extends PyObject
 
     @Override
     public PyObject sub(PyObject p) {
-        if (p instanceof PyLong){
+        if (p instanceof PyLong) {
             return new PyFloat(this.num - ((PyLong) p).asLong());
         }
-        if (p instanceof PyFloat){
+        if (p instanceof PyFloat) {
             return new PyFloat(this.num - ((PyFloat) p).asFloat());
         }
-        if(p instanceof PyBoolean){
+        if (p instanceof PyBoolean) {
             return new PyFloat(this.num - ((PyBoolean) p).asInt());
-        }
-        else{
-            super.add(p);
+        } else {
+            super.sub(p);
             return new PyNone();
         }
     }
 
     @Override
     public PyObject mul(PyObject p) {
-        if (p instanceof PyLong){
+        if (p instanceof PyLong) {
             return new PyFloat(this.num * ((PyLong) p).asLong());
         }
-        if (p instanceof PyFloat){
+        if (p instanceof PyFloat) {
             return new PyFloat(this.num * ((PyFloat) p).asFloat());
         }
-        if(p instanceof PyBoolean){
+        if (p instanceof PyBoolean) {
             return new PyFloat(this.num * ((PyBoolean) p).asInt());
-        }
-        else{
-            super.add(p);
+        } else {
+            super.mul(p);
             return new PyNone();
         }
     }
+
+    @Override
+    public PyObject div(PyObject p) {
+        if (p instanceof PyLong) {
+            return new PyFloat(this.num / ((PyLong) p).asLong());
+        }
+        if (p instanceof PyFloat) {
+            return new PyFloat(this.num / ((PyFloat) p).asFloat());
+        } else {
+            super.div(p);
+            return new PyNone();
+        }
+    }
+
+    @Override
+    public PyObject mod(PyObject p) {
+        if (p instanceof PyLong) {
+            return new PyFloat(this.num % ((PyLong) p).asLong());
+        }
+        if (p instanceof PyFloat) {
+            return new PyFloat(this.num % ((PyFloat) p).asFloat());
+        } else {
+            super.mod(p);
+            return new PyNone();
+        }
+    }
+
+    @Override
+    public PyObject floordiv(PyObject p) {
+        if (p instanceof PyLong) {
+            return new PyFloat(Math.floor(this.num / ((PyLong) p).asLong()));
+        }
+        if (p instanceof PyFloat) {
+            return new PyFloat(Math.floor(this.num / ((PyFloat) p).asFloat()));
+        } else {
+            super.floordiv(p);
+            return new PyNone();
+        }
+    }
+
+
 
     @Override
     public PyObject uSub() {

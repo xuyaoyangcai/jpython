@@ -33,6 +33,19 @@ public abstract class PyObject
         throw new PyExceptions(PyExceptions.ErrorType.TYPE_ERROR, "TypeError: unsupported operand type(s) for " + this.getType()+" and "+p.getType());
     }
 
+    public PyObject div(PyObject p){
+        throw new PyExceptions(PyExceptions.ErrorType.TYPE_ERROR, "TypeError: unsupported operand type(s) for " + this.getType()+" and "+p.getType());
+    }
+
+    public PyObject mod(PyObject p){
+        throw new PyExceptions(PyExceptions.ErrorType.TYPE_ERROR, "TypeError: unsupported operand type(s) for " + this.getType()+" and "+p.getType());
+    }
+
+    public PyObject floordiv(PyObject p){
+        throw new PyExceptions(PyExceptions.ErrorType.TYPE_ERROR, "TypeError: unsupported operand type(s) for " + this.getType()+" and "+p.getType());
+    }
+
+
     public PyObject uSub(){
         throw new PyExceptions(PyExceptions.ErrorType.TYPE_ERROR, "TypeError: unsupported operand type(s) for " + this.getType());
     }

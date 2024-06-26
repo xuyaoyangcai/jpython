@@ -125,6 +125,55 @@ public class PyLong extends PyObject
     }
 
     @Override
+    public PyObject mod(PyObject p) {
+        if (p instanceof PyLong){
+            return new PyLong(this.num % ((PyLong) p).asLong());
+        }
+        if (p instanceof PyFloat){
+            return new PyFloat(this.num % ((PyFloat) p).asFloat());
+        }
+        if(p instanceof PyBoolean){
+            return new PyLong(this.num % ((PyBoolean) p).asInt());
+        }
+        else{
+            super.mod(p);
+            return new PyNone();
+        }
+    }
+
+    @Override
+    public PyObject div(PyObject p) {
+        if (p instanceof PyLong) {
+            return new PyFloat(this.num / ((PyLong) p).asLong());
+        }
+        if (p instanceof PyFloat) {
+            return new PyFloat(this.num / ((PyFloat) p).asFloat());
+        }
+        if (p instanceof PyBoolean) {
+            return new PyFloat(this.num / ((PyBoolean) p).asInt());
+        } else {
+            super.div(p);
+            return new PyNone();
+        }
+    }
+
+    @Override
+    public PyObject floordiv(PyObject p) {
+        if (p instanceof PyLong) {
+            return new PyLong(this.num / ((PyLong) p).asLong());
+        }
+        if (p instanceof PyFloat) {
+            return new PyLong((long) Math.floor(this.num / ((PyFloat) p).asFloat()));
+        }
+        if (p instanceof PyBoolean) {
+            return new PyLong(this.num / ((PyBoolean) p).asInt());
+        } else {
+            super.floordiv(p);
+            return new PyNone();
+        }
+    }
+
+    @Override
     public PyObject uSub() {
         return new PyLong(-this.num);
     }

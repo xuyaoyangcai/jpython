@@ -24,6 +24,12 @@ public class BinOpExpression extends OpExpression {
                 return lhs.sub(rhs);
             case Mult:
                 return lhs.mul(rhs);
+            case Div:
+                return lhs.div(rhs);
+            case Mod:
+                return lhs.mod(rhs);
+            case FloorDiv:
+                return lhs.floordiv(rhs);
             default:
                 return new PyUnicode("暂未实现".getBytes(),"utf-8");
 
