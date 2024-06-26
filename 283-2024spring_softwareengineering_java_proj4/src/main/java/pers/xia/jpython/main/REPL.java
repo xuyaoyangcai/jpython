@@ -166,6 +166,7 @@ public class REPL {
             formatEscape();
             // function to be implemented;
             int res = 0;
+            if(peekChar() != ' ') return res;
             Character c = readChar();
             while (c ==' '){
                 res += 1;
@@ -184,7 +185,34 @@ public class REPL {
                 convert it to a string class.
             */
             // function to be implemented, and delete the exception clause;
-            throw new RuntimeException("please implement the getFormatString function");
+            if(ch == '\''){
+                Character c = readChar();
+                while (c !='\''){
+                    if(c == '"'){
+                        String newStr = getFormatString(c);
+                        sb.append(c);
+                        sb.append(newStr);
+                    }else{
+                        sb.append(c);
+                    }
+                    c = readChar();
+                }
+                sb.append(c);
+            }else{
+                Character c = readChar();
+                while (c !='"'){
+                    if(c == '\''){
+                        String newStr = getFormatString(c);
+                        sb.append(c);
+                        sb.append(newStr);
+                    }else{
+                        sb.append(c);
+                    }
+                    c = readChar();
+                }
+                sb.append(c);
+            }
+            return sb.toString();
         }
         private String getFormatDouble(String line){
             // function to be implemented;
