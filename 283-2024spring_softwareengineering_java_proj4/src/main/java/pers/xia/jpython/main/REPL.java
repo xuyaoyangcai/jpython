@@ -127,6 +127,8 @@ public class REPL {
                 }else if(isComment(c)){         //comment case
                     String appendStr = ignoreComment();
                     sb.append(appendStr);
+                    int a = sb.length();
+                    sb.deleteCharAt(a - 1);
                 }
                 else if(isString(c)){          //string case
                     String appendStr = getFormatString(c);
@@ -156,12 +158,22 @@ public class REPL {
             while (peekChar()!=null){
                 sb.append(readChar());
             }
+            int a = sb.length();
+            sb.delete(0, a);
             return sb.toString();
         }
         public int getIndentationLevel(){
             formatEscape();
             // function to be implemented;
             int res = 0;
+            Character c = readChar();
+            while (c ==' '){
+                res += 1;
+                c = 'a';
+                if(peekChar() == ' '){
+                    c = readChar();
+                }
+            }
             return res;
         }
 
