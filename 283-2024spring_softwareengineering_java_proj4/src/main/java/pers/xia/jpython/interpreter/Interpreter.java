@@ -69,6 +69,10 @@ public class Interpreter {
             }
             Expression start = range.args.size() > 1 ? parser.parseExpression(range.args.get(0)) : new ConstantExpression(new PyLong(0));
             Expression end = range.args.size() > 1 ? parser.parseExpression(range.args.get(1)) : parser.parseExpression(range.args.get(0));
+            Expression step = null;
+            if(range.args.size() > 2){
+                step = parser.parseExpression(range.args.get(2));
+            }
             //Todo：从range中提取第3个参数
             List<Statement> body = new ArrayList<>();
             List<Statement> elseBody = new ArrayList<>();
@@ -79,6 +83,9 @@ public class Interpreter {
                 for(stmtType stmt: forNode.orelse){
                     elseBody.add(this.parseAstNode(stmt));
                 }
+            }
+            if(range.args.size() > 2){
+                return new ForStatement(variableName,start,end,step,body);
             }
             return new ForStatement(variableName,start,end,body);
         }
